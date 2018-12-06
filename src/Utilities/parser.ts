@@ -4,35 +4,7 @@ import { CardType, Color, ICard } from "../Interfaces/Deck";
 export default class Parser {
   public static parseCardsFromHtml(html: string): ICard[] {
     const cardsInDeck: ICard[] = cheerio(".card", html)
-      .map(function cardNameMapper(
-        index: number,
-        cardElement: CheerioElement
-      ): ICard {
-        const cardName: string = cheerio(cardElement)
-          .children(".cardNameContainer")
-          .children(".cardName")
-          .text();
-        const cardCountText: string = cheerio(cardElement)
-          .children(".cardCount")
-          .text();
-        const cardAmountInDeck: number = parseInt(
-          cardCountText.replace("x", "")
-        );
-        const costElementText: string = cheerio(cardElement)
-          .children(".cardTypeAndCost")
-          .children(".cardCost")
-          .text();
-        const color = Parser.getCardColor(cardElement);
-        const type = Parser.getCardType(cardElement);
-        const cost = parseInt(costElementText);
-        return {
-          cardAmountInDeck,
-          cardName,
-          color,
-          cost,
-          type
-        };
-      })
+      .map(this.cardNameMapper)
       .get();
 
     return cardsInDeck;
@@ -66,5 +38,32 @@ export default class Parser {
       console.log("The card does not have any color classes attached to it");
       return undefined;
     }
+  }
+  private static cardNameMapper(
+    index: number,
+    cardElement: CheerioElement
+  ): ICard {
+    const cardName: string = cheerio(cardElement)
+      .children(".cardNameContainer")
+      .children(".cardName")
+      .text();
+    const cardCountText: string = cheerio(cardElement)
+      .children(".cardCount")
+      .text();
+    const cardAmountInDeck: number = parseInt(cardCountText.replace("x", ""));
+    const costElementText: string = cheerio(cardElement)
+      .children(".cardTypeAndCost")
+      .children(".cardCost")
+      .text();
+    const color = Parser.getCardColor(cardElement);
+    const type = Parser.getCardType(cardElement);
+    const cost = parseInt(costElementText);
+    return {
+      cardAmountInDeck,
+      cardName,
+      color,
+      cost,
+      type
+    };
   }
 }
