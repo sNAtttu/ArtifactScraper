@@ -1,13 +1,12 @@
 import { join } from "path";
+import { argv } from "yargs";
 import { IDeck } from "./src/Interfaces/Deck";
 import DataService from "./src/Utilities/dataservice";
 import FileService from "./src/Utilities/fileservice";
 import Parser from "./src/Utilities/parser";
 class Scraper {
-  public static main(): void {
+  public static main(deckCode: string): void {
     const dataService = new DataService();
-    const deckCode: string =
-      "ADCJZcAI30mvAGAKAFAuF0m3QEoAUkLW0kKFQgDGQELKgEMLQEBAUEGaQEIgQE_";
     const url: string = `https://www.playartifact.com/d/${deckCode}`;
     dataService
       .getRawHtmlFromSite(url)
@@ -27,4 +26,9 @@ class Scraper {
   private static readonly FolderName: string = "Drafts";
 }
 
-Scraper.main();
+if (!argv.code) {
+  console.log("You need to provide the deck code");
+  console.log("Example node index.js --code=ASDBASDBASDASDJ2133121321");
+}
+
+Scraper.main(argv.code);

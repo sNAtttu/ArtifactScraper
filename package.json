@@ -8,10 +8,12 @@
   "dependencies": {
     "@types/cheerio": "^0.22.10",
     "@types/request-promise": "^4.1.42",
+    "@types/yargs": "^12.0.1",
     "cheerio": "^1.0.0-rc.2",
     "puppeteer": "^1.11.0",
     "request": "^2.88.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "yargs": "^12.0.5"
   },
   "devDependencies": {
     "prettier": "^1.15.3",
@@ -21,7 +23,7 @@
     "typescript": "^3.2.1"
   },
   "scripts": {
-    "compile": "tsc",
+    "compile": "tslint src/**/*.ts && tsc",
     "scrape": "tslint src/**/*.ts && tsc && node ./dist/index.js"
   }
 }
