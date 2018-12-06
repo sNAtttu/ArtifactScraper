@@ -42,10 +42,20 @@ export default class Parser {
     index: number,
     cardElement: CheerioElement
   ): ICard {
-    const cardName: string = cheerio(cardElement)
-      .children(".cardNameContainer")
-      .children(".cardName")
+    const cardNameContainer = cheerio(cardElement).children(
+      ".cardNameContainer"
+    );
+    const cardName: string = cardNameContainer.children(".cardName").text();
+    const isSignatureCardText = cardNameContainer
+      .children(".cardIncludeName")
       .text();
+
+    let isSignatureCard: boolean = false;
+
+    if (isSignatureCardText && isSignatureCardText === "Signature Card") {
+      isSignatureCard = true;
+    }
+
     const cardCountText: string = cheerio(cardElement)
       .children(".cardCount")
       .text();
@@ -62,6 +72,7 @@ export default class Parser {
       cardName,
       color,
       cost,
+      isSignatureCard,
       type
     };
   }

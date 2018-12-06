@@ -6,6 +6,7 @@ export interface ICard {
   cost: number;
   type: CardType;
   color: Color;
+  isSignatureCard: boolean;
 }
 export interface IDeck {
   author: string;
