@@ -1,6 +1,11 @@
+export type CardType = "Spell" | "Item" | "Improvement" | "Creep";
+export type Color = "Green" | "Red" | "Blue" | "Black";
 export interface ICard {
   cardName: string;
   cardAmountInDeck: number;
+  cost: number;
+  type: CardType;
+  color: Color;
 }
 export interface IDeck {
   author: string;
