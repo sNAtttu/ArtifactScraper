@@ -17,11 +17,12 @@ class Scraper {
         const cards: ICard[] = Parser.parseCardsFromHtml(html);
         const totalCardAmountInDeck = CardUtilities.GetCardAmountInDeck(cards);
         const author = argv.author || "unknown";
+        const wins = argv.wins || 0;
         const scrapedDeck: IDeck = {
           author,
           cards,
           deckCode,
-          wins: argv.wins || 0,
+          wins,
           totalCardAmountInDeck
         };
         const folderPath = join(`${__dirname}`, `${Scraper.FolderName}`);
