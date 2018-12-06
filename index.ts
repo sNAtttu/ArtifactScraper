@@ -1,6 +1,9 @@
 import { join } from "path";
 import { argv } from "yargs";
 import { IDeck } from "./src/Interfaces/Deck";
+import { ICard } from "./src/Interfaces/Deck";
+
+import CardUtilities from "./src/Utilities/cardUtilities";
 import DataService from "./src/Utilities/dataservice";
 import FileService from "./src/Utilities/fileservice";
 import Parser from "./src/Utilities/parser";
@@ -11,10 +14,13 @@ class Scraper {
     dataService
       .getRawHtmlFromSite(url)
       .then(html => {
-        const cards: string[] = Parser.parseCardsFromHtml(html);
+        const cards: ICard[] = Parser.parseCardsFromHtml(html);
+        const totalCardAmountInDeck = CardUtilities.GetCardAmountInDeck(cards);
         const scrapedDeck: IDeck = {
           cards,
-          deckCode
+          deckCode,
+          wins: argv.wins || 0,
+          totalCardAmountInDeck
         };
         const folderPath = join(`${__dirname}`, `${Scraper.FolderName}`);
         FileService.WriteDeckToJsonFile(scrapedDeck, folderPath);
