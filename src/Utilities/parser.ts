@@ -20,7 +20,6 @@ export default class Parser {
     } else if (cheerioElement.hasClass("colorBlue")) {
       return "Blue";
     } else {
-      console.log("The card does not have any color classes attached to it");
       return undefined;
     }
   }
@@ -35,7 +34,7 @@ export default class Parser {
     } else if (cheerioElement.hasClass("typeItem")) {
       return "Item";
     } else {
-      console.log("The card does not have any color classes attached to it");
+      console.log("Card doesn't have a type");
       return undefined;
     }
   }
