@@ -24,6 +24,6 @@
   },
   "scripts": {
     "compile": "tslint src/**/*.ts && tsc",
-    "scrape": "tslint src/**/*.ts && tsc && node ./dist/index.js"
+    "scrape": "tslint src/**/*.ts && tsc && node ./dist/index.js --debug=true"
   }
 }

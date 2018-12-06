@@ -26,9 +26,18 @@ class Scraper {
   private static readonly FolderName: string = "Drafts";
 }
 
-if (!argv.code) {
-  console.log("You need to provide the deck code");
-  console.log("Example node index.js --code=ASDBASDBASDASDJ2133121321");
+let deckCodeFromArguments = argv.code;
+
+if (!deckCodeFromArguments) {
+  if (argv.debug) {
+    // For debug usage
+    deckCodeFromArguments =
+      "ADCJXQAo307uwEQEVK4XQIk3QEGCAoCB0cJBCIBCgUDAUgKAwEMIgE7ASEBBgMCHhkB";
+  } else {
+    console.log("You need to provide the deck code");
+    console.log("Example node index.js --code=ASDBASDBASDASDJ2133121321");
+    process.exit();
+  }
 }
 
-Scraper.main(argv.code);
+Scraper.main(deckCodeFromArguments);
