@@ -3,6 +3,7 @@ export interface ICard {
   cardAmountInDeck: number;
 }
 export interface IDeck {
+  author: string;
   deckCode: string;
   cards: ICard[];
   wins: number;

@@ -16,7 +16,9 @@ class Scraper {
       .then(html => {
         const cards: ICard[] = Parser.parseCardsFromHtml(html);
         const totalCardAmountInDeck = CardUtilities.GetCardAmountInDeck(cards);
+        const author = argv.author || "unknown";
         const scrapedDeck: IDeck = {
+          author,
           cards,
           deckCode,
           wins: argv.wins || 0,
