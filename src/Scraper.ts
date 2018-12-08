@@ -1,6 +1,5 @@
 import { join } from "path";
-import { argv } from "yargs";
-import { ICard, IDeck } from "./Interfaces/Deck";
+import { DraftType, ICard, IDeck } from "./Interfaces/Deck";
 
 import CardUtilities from "./Utilities/CardUtilities";
 import DataService from "./Utilities/DataService";
@@ -22,8 +21,10 @@ export default class Scraper {
   }
   public async createDeckFromDeckCode(
     wins: number,
+    loses: number,
     author: string,
-    deckCode: string
+    deckCode: string,
+    draftType: DraftType
   ): Promise<IDeck | void> {
     const dataService = new DataService();
     const url: string = `${this.artifactHostUrl}${deckCode}`;
@@ -33,11 +34,15 @@ export default class Scraper {
         const cards: ICard[] = Parser.parseCardsFromHtml(html);
         const totalCardAmountInDeck = CardUtilities.GetCardAmountInDeck(cards);
         const created: Date = new Date();
+        const isPerfectRun = loses === 0 && wins === 5;
         const scrapedDeck: IDeck = {
           author,
           cards,
           created,
           deckCode,
+          draftType,
+          isPerfectRun,
+          loses,
           totalCardAmountInDeck,
           wins
         };

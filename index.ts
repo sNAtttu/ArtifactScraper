@@ -21,11 +21,13 @@ app.post("/deck/", (request, response) => {
   const useFileSystem = false;
   const useDatabase = true;
   const scraper = new Scraper(useFileSystem, useDatabase);
-  const { winAmount, author, deckCode } = request.body;
+  const { winAmount, author, deckCode, loseAmount, draftType } = request.body;
   const loadDeck: Promise<IDeck | void> = scraper.createDeckFromDeckCode(
     winAmount,
+    loseAmount,
     author,
-    deckCode
+    deckCode,
+    draftType
   );
   loadDeck
     .then(deck => {
