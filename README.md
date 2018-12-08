@@ -17,12 +17,13 @@ Example of payload that the server approves:
 URL: http://localhost:3000
 
 Payload:
+```
 {
 "winAmount": 1,
 "author": "sNAttu",
 "deckCode": "ADCJYIAKH02uwFOqQEBeF0CJt0BBAcLAkcISAQCBR8FBgMJDQsHAVw3AQQPEA0kAR4_"
 }
-
+```
 Response will be a json object which is generated from the contents in url 
 
 https://www.playartifact.com/d/ADCJYIAKH02uwFOqQEBeF0CJt0BBAcLAkcISAQCBR8FBgMJDQsHAVw3AQQPEA0kAR4_
