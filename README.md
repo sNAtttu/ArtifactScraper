@@ -14,7 +14,3 @@ A small NodeJS application written in TypeScript which is at this point of time 
 ## Motivation
 
 Project exists because I want to know my deck history and see what cards I've played in the past.
-
-## License
-
-MIT
