@@ -8,8 +8,24 @@ A small NodeJS application written in TypeScript which is at this point of time 
 1. Pull the repository
 2. `yarn install`
 3. `yarn compile`
-4. In the dist folder `node index.js --code={deckCode}`
-5. After this there will be "Drafts" folder inside the dist folder which will contain json file of your deck.
+4. `yarn start`
+
+After these four steps you should have an express server running on localhost:3000.
+
+Example of payload that the server approves:
+
+URL: http://localhost:3000
+
+Payload:
+{
+"winAmount": 1,
+"author": "sNAttu",
+"deckCode": "ADCJYIAKH02uwFOqQEBeF0CJt0BBAcLAkcISAQCBR8FBgMJDQsHAVw3AQQPEA0kAR4_"
+}
+
+Response will be a json object which is generated from the contents in url 
+
+https://www.playartifact.com/d/ADCJYIAKH02uwFOqQEBeF0CJt0BBAcLAkcISAQCBR8FBgMJDQsHAVw3AQQPEA0kAR4_
 
 ## Motivation
 
