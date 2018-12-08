@@ -7,29 +7,53 @@ import DataService from "./Utilities/DataService";
 import FileService from "./Utilities/FileService";
 import Parser from "./Utilities/Parser";
 export default class Scraper {
-  public static main(deckCode: string): void {
+  public useFileSystem: boolean = false;
+  public useDatabase: boolean = true;
+  private folderName: string = "Drafts";
+  private readonly artifactHostUrl: string = "https://www.playartifact.com/d/";
+  constructor(
+    useFileSystem: boolean,
+    useDatabase: boolean,
+    folderName?: string
+  ) {
+    this.useFileSystem = useFileSystem;
+    this.useDatabase = useDatabase;
+    this.folderName = folderName;
+  }
+  public async createDeckFromDeckCode(
+    wins: number,
+    author: string,
+    deckCode: string
+  ): Promise<IDeck | void> {
     const dataService = new DataService();
-    const url: string = `https://www.playartifact.com/d/${deckCode}`;
-    dataService
+    const url: string = `${this.artifactHostUrl}${deckCode}`;
+    const deckPromise: IDeck | void = await dataService
       .getRawHtmlFromSite(url)
       .then(html => {
         const cards: ICard[] = Parser.parseCardsFromHtml(html);
         const totalCardAmountInDeck = CardUtilities.GetCardAmountInDeck(cards);
-        const author = argv.author || "unknown";
-        const wins = argv.wins || 0;
+        const created: Date = new Date();
         const scrapedDeck: IDeck = {
           author,
           cards,
+          created,
           deckCode,
           totalCardAmountInDeck,
           wins
         };
-        const folderPath = join(`${__dirname}`, `${Scraper.FolderName}`);
-        FileService.WriteDeckToJsonFile(scrapedDeck, folderPath);
+        const folderPath = join(`${__dirname}`, `${this.folderName}`);
+        if (this.useFileSystem) {
+          FileService.WriteDeckToJsonFile(scrapedDeck, folderPath);
+        }
+        if (this.useDatabase) {
+          dataService.saveDeckToDatabase(scrapedDeck);
+        }
+
+        return scrapedDeck;
       })
       .catch(error => {
         console.log(error);
       });
+    return deckPromise;
   }
-  private static readonly FolderName: string = "Drafts";
 }

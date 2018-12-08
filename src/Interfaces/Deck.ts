@@ -10,6 +10,7 @@ export interface ICard {
 }
 export interface IDeck {
   author: string;
+  created: Date;
   deckCode: string;
   cards: ICard[];
   wins: number;
