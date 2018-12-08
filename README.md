@@ -6,8 +6,8 @@ A small NodeJS application written in TypeScript which is at this point of time 
 ## Instructions
 
 At this point the application will save the deck to mongodb if theres one on the localhost:27017.
-Database name: ArtifactDeckDb
-Collection name: decks
+* Database name: ArtifactDeckDb
+* Collection name: decks
 
 1. Pull the repository
 2. `yarn install`
