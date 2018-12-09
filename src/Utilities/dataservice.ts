@@ -10,6 +10,24 @@ export default class DataService {
   public async getRawHtmlFromSite(url: string): Promise<string> {
     return requestPromise(url);
   }
+  public async getDraftedDecksFromDatabase(
+    sendResponse: (cards: IDeck[]) => void
+  ) {
+    const client = new MongoClient(this.databaseUrl);
+    client.connect(async err => {
+      console.log("Connected successfully to database server");
+      if (err) {
+        console.log(err);
+        throw err;
+      }
+      const db = client.db(this.databaseName);
+      const deckCollection = db.collection(this.deckCollectionName);
+      const allCards = await deckCollection.find({}).toArray();
+      console.log("Got all cards from DB. Count " + allCards.length);
+      client.close();
+      sendResponse(allCards);
+    });
+  }
   public async saveDeckToDatabase(deck: IDeck) {
     const client = new MongoClient(this.databaseUrl);
 

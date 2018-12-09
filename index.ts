@@ -2,8 +2,10 @@ import * as bodyParser from "body-parser";
 import * as express from "express";
 import { IDeck } from "./src/Interfaces/Deck";
 import Scraper from "./src/Scraper";
+import DataService from "./src/Utilities/DataService";
+
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.use(
   bodyParser.urlencoded({
@@ -15,6 +17,11 @@ app.use(bodyParser.json());
 
 app.get("/", (request, response) => {
   response.send("Up and running");
+});
+
+app.get("/deck/", (request, response) => {
+  const dataService = new DataService();
+  dataService.getDraftedDecksFromDatabase(cards => response.send(cards));
 });
 
 app.post("/deck/", (request, response) => {
