@@ -1,4 +1,5 @@
 import * as bodyParser from "body-parser";
+import * as cors from "cors";
 import * as express from "express";
 import { IDeck } from "./src/Interfaces/Deck";
 import Scraper from "./src/Scraper";
@@ -6,6 +7,8 @@ import DataService from "./src/Utilities/DataService";
 
 const app = express();
 const port = 3001;
+
+app.use(cors());
 
 app.use(
   bodyParser.urlencoded({
