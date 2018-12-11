@@ -9,6 +9,13 @@ export interface ICard {
   color: Color;
   isSignatureCard: boolean;
 }
+
+export interface IHero {
+  name: string;
+  color: Color;
+  signatureCard: string;
+}
+
 export interface IDeck {
   author: string;
   created: Date;
@@ -19,4 +26,5 @@ export interface IDeck {
   wins: number;
   isPerfectRun: boolean;
   totalCardAmountInDeck: number;
+  heroes: IHero[];
 }

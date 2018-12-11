@@ -34,13 +34,15 @@ export default class Scraper {
         const cards: ICard[] = Parser.parseCardsFromHtml(html);
         const totalCardAmountInDeck = CardUtilities.GetCardAmountInDeck(cards);
         const created: Date = new Date();
-        const isPerfectRun = loses === 0 && wins === 5;
+        const isPerfectRun = wins === 5;
+        const heroes = CardUtilities.GetDeckHeroes(cards);
         const scrapedDeck: IDeck = {
           author,
           cards,
           created,
           deckCode,
           draftType,
+          heroes,
           isPerfectRun,
           loses,
           totalCardAmountInDeck,
