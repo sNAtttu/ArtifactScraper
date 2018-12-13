@@ -44,6 +44,8 @@ export default class CardUtilities {
           dividedCards.push(card);
         }
       });
+    } else {
+      dividedCards.push(...signatureCards);
     }
     if (dividedCards.length !== 5) {
       throw new console.error("Wrong amount of heroes in the deck");
