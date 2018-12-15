@@ -1,0 +1,12 @@
+{
+  "tasks": [{
+    "taskName": "tsc-watch",
+    "command": "yarn",
+    "args": ["watch"],
+    "isShellCommand": true,
+    "isBackground": true,
+    "isBuildCommand": true,
+    "problemMatcher": "$tsc-watch",
+    "showOutput": "always"
+  }]
+}

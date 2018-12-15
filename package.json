@@ -2,7 +2,7 @@
   "name": "artifact-scraper",
   "version": "1.0.0",
   "description": "Tool for scraping artifact decks and storing data",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "author": "Santeri Nousiainen",
   "license": "MIT",
   "dependencies": {
@@ -18,11 +18,11 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "mongodb": "^3.1.10",
-    "puppeteer": "^1.11.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
+    "nodemon": "^1.18.9",
     "prettier": "^1.15.3",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.17.0",
@@ -30,7 +30,11 @@
     "typescript": "^3.2.1"
   },
   "scripts": {
+    "build": "docker build -t scrape-server:latest .",
     "compile": "tslint src/**/*.ts && tsc",
-    "start": "node dist/index.js"
+    "watch": "tsc -w -p ./",
+    "debug": "nodemon --watch ./dist --inspect=0.0.0.0:9229 --nolazy ./dist/index.js",
+    "docker-debug": "docker-compose up",
+    "start": "node ./dist/index.js"
   }
 }

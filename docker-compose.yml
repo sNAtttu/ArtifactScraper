@@ -1,0 +1,10 @@
+version: "2"
+services:
+  server:
+    build: .
+    command: yarn debug
+    volumes:
+      - ./dist:/server/dist
+    ports:
+      - "3001:3001"
+      - "9229:9229"
