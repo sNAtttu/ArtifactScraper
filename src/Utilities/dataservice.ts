@@ -3,7 +3,7 @@ import * as requestPromise from "request-promise";
 import { IDeck } from "../Interfaces/Deck";
 
 export default class DataService {
-  private databaseUrl: string = "mongodb://localhost:27017";
+  private databaseUrl: string = "mongodb://mongodb:27017";
   private databaseName: string = "ArtifactDeckDb";
   private deckCollectionName: string = "decks";
 
